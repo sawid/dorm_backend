@@ -59,7 +59,7 @@ exports.loginUser = async (req, res) => {
         try {
                 const {username, password} = req.body;
                 var user = await User.findOneAndUpdate({username}, {new: true});
-                if(user) {
+                if(user && user.enabled) {
                         // Check Password
                         const isMatch = await bcrypt.compare(password, user.password);
                         if (!isMatch) {
@@ -82,6 +82,20 @@ exports.loginUser = async (req, res) => {
                 else {
                         return res.status(400).send("UserNotFond");
                 }
+        } catch (err) {
+                console.log(err)
+                res.status(500).send("ServerError")
+        }
+}
+
+exports.currentUser = async (req, res) => {
+        try {
+                
+                const user = await User.findOne({username: req.user.username})
+                .select('-password').exec();
+                console.log(user);
+                res.send(user);
+
         } catch (err) {
                 console.log(err)
                 res.status(500).send("ServerError")

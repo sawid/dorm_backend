@@ -2,9 +2,6 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
   {
-    user_id: {
-      type: Number,
-    },
     username: {
       type: String,
     },
@@ -13,7 +10,7 @@ const UserSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      default: "admin",
+      default: "user",
     },
     enabled: {
       type: Boolean,
