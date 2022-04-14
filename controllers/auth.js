@@ -92,7 +92,7 @@ exports.currentUser = async (req, res) => {
         try {
                 
                 const user = await User.findOne({username: req.user.username})
-                .select('-password').exec();
+                .select('-password').exec()
                 console.log(user);
                 res.send(user);
 

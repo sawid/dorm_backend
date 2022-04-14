@@ -19,6 +19,6 @@ router.delete('/auth', deleteUser)
 // Private Route
 router.post('/current-user', auth, currentUser);
 
-router.post('/current-admin', auth, adminCheck, currentUser);
+router.post("/current-admin", auth, adminCheck, currentUser);
 
 module.exports = router
