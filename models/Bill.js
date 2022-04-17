@@ -5,6 +5,9 @@ const BillSchema = new mongoose.Schema(
     roomId: {
       type: String,
     },
+    month: {
+      type: String,
+    },
     isBillNotified: {
       type: Boolean,
       default: false,
@@ -14,30 +17,27 @@ const BillSchema = new mongoose.Schema(
       default: false,
     },
     rentalFee: {
-      type: Double,
+      type: Number,
       default: 0,
     },
     waterUnitLastMonth: {
-      type: Double,
+      type: Number,
       default: 0,
     },
     waterUnitThisMonth: {
-      type: Double,
+      type: Number,
       default: 0,
     },
     electricUnitLastMonth: {
-      type: Double,
+      type: Number,
       default: 0,
     },
     electricUnitThisMonth: {
-      type: Double,
+      type: Number,
       default: 0,
     },
-    month: {
-      type: String,
-    },
     rentalNet: {
-      type: Double,
+      type: Number,
       default: 0,
     },
   },

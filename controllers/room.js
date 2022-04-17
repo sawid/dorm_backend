@@ -22,3 +22,36 @@ exports.createRoom = async (req, res) => {
                 res.status(500).send("ServerError")
         }
 }
+
+exports.listRoom = async (req, res) => {
+        try {
+                const room = await Room.find({}).exec();
+                res.send(room)
+                
+        } catch (err) {
+                console.log(err);
+                res.status(500).send("ServerError")
+        }
+}
+
+exports.readRoom = async (req, res) => {
+        try {
+                const id = req.params.id
+                const room = await Room.findOne({ _id:id }).exec();
+                res.send(room)
+        } catch (err) {
+                console.log(err);
+                res.status(500).send("ServerError")
+        }
+}
+
+exports.removeRoom = async (req, res) => {
+        try {
+                const id = req.params.id
+                const room = await Room.findOneAndDelete({_id:id}).exec();
+                res.send(room)
+        } catch (err) {
+                console.log(err);
+                res.status(500).send("ServerError")
+        }
+}

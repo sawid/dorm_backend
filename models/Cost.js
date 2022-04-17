@@ -3,15 +3,15 @@ const mongoose = require("mongoose");
 const CostSchema = new mongoose.Schema(
   {
     waterPriceUnit: {
-      type: Double,
+      type: Number,
       default: 0,
     },
     electricPriceUnit: {
-      type: Double,
+      type: Number,
       default: 0,
     },
     commonFee: {
-      type: Double,
+      type: Number,
       default: 0,
     },
   },

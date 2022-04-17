@@ -7,12 +7,15 @@ const RenterSchema = new mongoose.Schema(
     },
     lineId: {
       type: String,
+      default: "-",
     },
     telNum: {
       type: String,
+      default: "None",
     },
     contactCreate: {
         type: Date,
+        default: "01/01/1970",
     },
   },
   { timestamps: true }
