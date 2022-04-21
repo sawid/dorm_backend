@@ -4,7 +4,7 @@ const BillSchema = new mongoose.Schema(
   {
     roomId: {
       type: String,
-    },
+    },     
     month: {
       type: String,
     },
