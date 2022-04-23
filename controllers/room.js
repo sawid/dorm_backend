@@ -45,21 +45,6 @@ exports.readRoom = async (req, res) => {
         }
 }
 
-exports.updateRoom = async(req, res) => {
-        try{
-           const id = req.params.id
-           var { amountBed , rentalFee } = req.body.dataRoom
-           console.log(amountBed)
-           const room = await Room.findOneAndUpdate({ _id:id }, { amountBed: amountBed , rentalFee : rentalFee}).exec();
-           res.send(room)
-
-        }catch(err){
-           console.log(err);
-           res.status(500).send("Sever Error!")
-        }
-
-} 
-
 exports.removeRoom = async (req, res) => {
         try {
                 const id = req.params.id
@@ -70,70 +55,3 @@ exports.removeRoom = async (req, res) => {
                 res.status(500).send("ServerError")
         }
 }
-
-
-
-
-
-
-// Not Use 
-/*
-exports.updateRoomNameRenter = async(req, res) => {
-        try{
-           const id = req.params.id
-           var { name } = req.body.dataRoom
-           console.log(name)
-           const room = await Room.findOneAndUpdate({ _id:id }, { name : name}).exec();
-           res.send(room)
-
-        }catch(err){
-           console.log(err);
-           res.status(500).send("Sever Error!")
-        }
-
-} 
-
-exports.updateRentelFee = async(req, res) => {
-        try{
-           const id = req.params.id
-           var { rentalFee } = req.body.dataRoom
-           console.log(rentalFee)
-           const room_fee = await Room.findOneAndUpdate({ _id:id }, { rentalFee : rentalFee}).exec();
-           res.send(room_fee)
-
-        }catch(err){
-           console.log(err);
-           res.status(500).send("Sever Error!")
-        }
-
-} 
-
-exports.updateRoomType = async(req, res) => {
-        try{
-           const id = req.params.id
-           var {room_type } = req.body.dataRoom
-           console.log(room_type)
-           const type_room = await Room.findOneAndUpdate({ _id:id }, { room_type : room_type}).exec();
-           res.send( type_room)
-
-        }catch(err){
-           console.log(err);
-           res.status(500).send("Sever Error!")
-        }
-
-} 
-
-exports.updatePhoneNumber = async(req, res) => {
-        try{
-           const id = req.params.id
-           var { phoneNumber } = req.body.dataRoom
-           console.log(amountBed)
-           const room = await Room.findOneAndUpdate({ _id:id }, {  phoneNumber : phoneNumber  }).exec();
-           res.send(room)
-
-        }catch(err){
-           console.log(err);
-           res.status(500).send("Sever Error!")
-        }
-
-} */

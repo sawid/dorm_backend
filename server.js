@@ -4,7 +4,8 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan');
 require('dotenv').config();
 const { readdirSync } = require('fs')
-const connectDB = require('./config/db')
+const connectDB = require('./config/db');
+const { lineSent } = require('./controllers/linebot');
 
 const app = express()
 
@@ -20,6 +21,14 @@ app.use(cors())
 // app.use('/api', require('./routes/api'))
 
 readdirSync('./routes').map((r)=> app.use('/api', require('./routes/' + r)))
+
+app.get("/", (req, res) => {
+  res.send('สวัสดี express')
+      })
+
+app.post("/webhook", lineSent)
+
+
 
 const port = process.env.PORT
 app.listen(port, ()=>{
