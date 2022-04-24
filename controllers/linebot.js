@@ -1,8 +1,8 @@
 const bcrypt = require('bcryptjs')
-const jwt = require("jsonwebtoken")
 const { token } = require('morgan')
 const Problem = require("../models/Problem")
 const Renter = require("../models/Renter")
+const Annoucement = require("../models/Annoucement")
 const line = require('@line/bot-sdk');
 const client = new line.Client({
         channelAccessToken: process.env.CHANNELTOKEN
@@ -63,10 +63,17 @@ exports.lineSentMsg = async (req, res) => {
 
 exports.lineSentBroadcast = async (req, res) => {
         try {
+                const { userId, text } = req.body
+                var annoucement = new Annoucement({
+                        annoucementText: text,
+                        annoucementUser: userId,
+                })
+                await annoucement.save();
                 const message = {
                         type: 'text',
-                        text: 'Klaco'
+                        text: text,
                       };
+                
                 client.broadcast(message)                      
                 console.log('req.body =>', JSON.stringify(req.body,null,2)) //สิ่งที่ Line ส่งมา
                 res.send("HTTP POST request sent to the webhook URL!")
