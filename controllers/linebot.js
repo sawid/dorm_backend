@@ -60,3 +60,19 @@ exports.lineSentMsg = async (req, res) => {
                 res.status(500).send("ServerError")
         }
 }
+
+exports.lineSentBroadcast = async (req, res) => {
+        try {
+                const message = {
+                        type: 'text',
+                        text: 'Klaco'
+                      };
+                client.broadcast(message)                      
+                console.log('req.body =>', JSON.stringify(req.body,null,2)) //สิ่งที่ Line ส่งมา
+                res.send("HTTP POST request sent to the webhook URL!")
+                
+        } catch (err) {
+                console.log(err);
+                res.status(500).send("ServerError")
+        }
+}
