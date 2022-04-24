@@ -63,10 +63,9 @@ exports.lineSentMsg = async (req, res) => {
 
 exports.lineSentBroadcast = async (req, res) => {
         try {
-                const { userId, text } = req.body
+                const { text } = req.body
                 var annoucement = new Annoucement({
                         annoucementText: text,
-                        annoucementUser: userId,
                 })
                 await annoucement.save();
                 const message = {
