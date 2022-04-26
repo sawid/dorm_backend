@@ -36,6 +36,19 @@ exports.listBill = async(req, res) => {
     }
 }
 
+exports.readMonth = async(req, res) => {
+    try {
+        const id = req.params.id
+        var { month } = req.body
+        const bill = await Bill.findOne({roomId: id, month:month}).exec();
+        res.send(bill)
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("ServerError")
+    }
+}
+
 exports.readBill = async(req, res) => {
     try {
         const id = req.params.id
