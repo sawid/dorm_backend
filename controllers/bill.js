@@ -40,7 +40,7 @@ exports.readMonth = async(req, res) => {
     try {
         const id = req.params.id
         var { month } = req.body
-        const bill = await Bill.findOne({roomId: id, month:month}).exec();
+        const bill = await Bill.findOne({ roomId: id, month: month }).exec();
         res.send(bill)
 
     } catch (err) {
@@ -107,9 +107,9 @@ exports.listCost = async(req, res) => {
 exports.updateBill = async(req, res) => {
     try {
         const id = req.params.id
-        var { rentalFee, waterUnitLastMonth, waterUnitThisMonth,electricUnitLastMonth,electricUnitThisMonth,rentalNet } = req.body.dataBill
+        var { rentalFee, waterUnitLastMonth, waterUnitThisMonth, electricUnitLastMonth, electricUnitThisMonth, rentalNet } = req.body.dataBill
         const bill = await Bill.findOneAndUpdate({ _id: id }, {
-            rentalFee: rentalFee ,
+            rentalFee: rentalFee,
             waterUnitLastMonth: waterUnitLastMonth,
             waterUnitThisMonth: waterUnitThisMonth,
             electricUnitLastMonth: electricUnitLastMonth,
@@ -123,4 +123,15 @@ exports.updateBill = async(req, res) => {
         res.status(500).send("Server Error!")
     }
 
+}
+
+exports.changePayStatus = async(req, res) => {
+    try {
+
+        const bill = await Bill.findOneAndUpdate({ _id: req.params.id }, { isPayed: req.body.isPayed }).exec();
+        res.send(bill)
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("ServerError")
+    }
 }
