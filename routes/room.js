@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { listRoom, createRoom, readRoom, removeRoom ,updateRoom, updatePhoneNumber , updateRoomNameRenter, updateRoomType,updateRentelFee } = require('../controllers/room')
+const { listRoom, createRoom, readRoom, removeRoom ,updateRoom } = require('../controllers/room')
 
 const { auth, adminCheck } = require('../middleware/auth')
 

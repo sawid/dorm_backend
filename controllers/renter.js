@@ -55,3 +55,18 @@ exports.removeRenter = async (req, res) => {
                 res.status(500).send("ServerError")
         }
 }
+
+exports.updateRenter = async(req, res) => {
+        try{
+           const id = req.params.id
+           var { renterName } = req.body.dataRenter
+           console.log(renterName)
+           const renter = await Renter.findOneAndUpdate({ _id:id }, { renterName:renterName }).exec();
+           res.send(renter)
+
+        }catch(err){
+           console.log(err);
+           res.status(500).send("Sever Error!")
+        }
+
+} 
