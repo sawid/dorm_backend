@@ -16,7 +16,6 @@ app.use(bodyParser.json({limit:'20mb'}))
 app.use(cors())
 
 
-
 // Route
 // app.use('/api', require('./routes/api'))
 

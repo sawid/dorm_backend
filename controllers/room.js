@@ -71,6 +71,16 @@ exports.removeRoom = async (req, res) => {
         }
 }
 
+exports.updateFile = async (req, res) => {
+        try {
+                const id = req.params.id
+                const room = await Room.findOneAndDelete({_id:id}).exec();
+                res.send(room)
+        } catch (err) {
+                console.log(err);
+                res.status(500).send("ServerError")
+        }
+}
 
 
 

@@ -25,6 +25,10 @@ const RoomSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    contactPath: {
+      type: String,
+      default: "none",
+    },
     room_type: {
       type: String,
       default: "fan",
