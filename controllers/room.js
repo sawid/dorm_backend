@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs')
 const Room = require("../models/Room")
 const jwt = require("jsonwebtoken")
 const { token } = require('morgan')
+const Bill = require('../models/Bill')
 
 exports.createRoom = async (req, res) => {
         try {
@@ -82,6 +83,19 @@ exports.updateFile = async (req, res) => {
         }
 }
 
+exports.getRoomName = async (req, res) => {
+        try {
+                const id = req.params.id
+                console.log(id)
+                const bill = await Bill.findOne({_id:id}).exec();
+                console.log(bill)
+                const room = await Room.findOne({_id:bill.roomId}).exec();
+                res.send(room.roomName)
+        } catch (err) {
+                console.log(err);
+                res.status(500).send("ServerError")
+        }
+}
 
 
 
