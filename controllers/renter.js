@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs')
 const Renter = require("../models/Renter")
+const Room = require("../models/Room")
 const jwt = require("jsonwebtoken")
 const { token } = require('morgan')
 
@@ -44,6 +45,41 @@ exports.readRenter = async (req, res) => {
                 res.status(500).send("ServerError")
         }
 }
+
+exports.getRenterRoom = async (req, res) => {
+        try {
+                const id = req.params.id
+                const room = await Room.findOne({ _id:id }).exec();
+                console.log(room.renterId)
+                const renter = await Renter.findOne({ _id:room.renterId }).exec();
+                var dataRenter = {
+                        renterName: renter.renterName,
+                        telNum: renter.telNum
+                }
+                res.send(dataRenter)
+        } catch (err) {
+                console.log(err);
+                res.status(500).send("ServerError")
+        }
+}
+
+exports.putRenterRoom = async (req, res) => {
+        try {
+                const id = req.params.id
+                const room = await Room.findOne({ _id:id }).exec();
+                console.log(room.renterId)
+                const renter = await Renter.findOne({ _id:room.renterId }).exec();
+                var dataRenter = {
+                        renterName: renter.renterName,
+                        telNum: renter.telNum
+                }
+                res.send(dataRenter)
+        } catch (err) {
+                console.log(err);
+                res.status(500).send("ServerError")
+        }
+}
+
 
 exports.removeRenter = async (req, res) => {
         try {
