@@ -50,7 +50,7 @@ exports.lineSentMsg = async (req, res) => {
         try {
                 const { roomId, messageData } = req.body
                 console.log(req.body)
-                const room = await Room.findOne({ _id: roomId }).exec();
+                const room = await Room.findOne({ roomName: roomId }).exec();
                 console.log(room)
                 const renter = await Renter.findOne({ _id: room.renterId }).exec();
                 const message = {
