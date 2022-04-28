@@ -1,5 +1,5 @@
 const express = require('express');
-const { listBill, readBill, createBill, removeBill, createCost, listCost, updateBill, readMonth, changePayStatus } = require('../controllers/bill');
+const { listBill, readBill, createBill, removeBill, createCost, listCost, updateBill, readMonth, changePayStatus, changeNotiStatus } = require('../controllers/bill');
 const router = express.Router()
 
 const { auth, adminCheck } = require('../middleware/auth')
@@ -15,6 +15,8 @@ router.put('/bill/:id', auth, adminCheck, updateBill);
 router.post('/bill/:id', auth, adminCheck, readMonth);
 
 router.post('/payStatus/:id', auth, adminCheck, changePayStatus);
+
+router.post('/notiStatus/:id', auth, adminCheck, changeNotiStatus);
 
 router.post('/bill', auth, adminCheck, createBill);
 

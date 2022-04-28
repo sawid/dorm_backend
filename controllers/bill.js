@@ -6,8 +6,8 @@ const { token } = require('morgan')
 
 exports.createBill = async(req, res) => {
     try {
-        const { roomId,month,rentalFee } = req.body
-        var bill = await Bill.findOne({ roomId: roomId,month:month,rentalFee: rentalFee })
+        const { roomId, month, rentalFee } = req.body
+        var bill = await Bill.findOne({ roomId: roomId, month: month, rentalFee: rentalFee })
         console.log(bill)
         if (bill) {
             return res.status(400).send('Bill Already Exists')
@@ -130,6 +130,17 @@ exports.changePayStatus = async(req, res) => {
     try {
 
         const bill = await Bill.findOneAndUpdate({ _id: req.params.id }, { isPayed: req.body.isPayed }).exec();
+        res.send(bill)
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("ServerError")
+    }
+}
+
+exports.changeNotiStatus = async(req, res) => {
+    try {
+
+        const bill = await Bill.findOneAndUpdate({ _id: req.params.id }, { isBillNotified: req.body.isBillNotified }).exec();
         res.send(bill)
     } catch (err) {
         console.log(err);
