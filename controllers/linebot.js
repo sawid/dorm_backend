@@ -4,6 +4,7 @@ const Problem = require("../models/Problem")
 const Renter = require("../models/Renter")
 const Annoucement = require("../models/Annoucement")
 const line = require('@line/bot-sdk');
+const Room = require('../models/Room')
 const client = new line.Client({
         channelAccessToken: process.env.CHANNELTOKEN
       });
@@ -47,11 +48,17 @@ exports.lineSent = async (req, res) => {
 
 exports.lineSentMsg = async (req, res) => {
         try {
+                const { roomId, messageData } = req.body
+                console.log(req.body)
+                const room = await Room.findOne({ _id: roomId }).exec();
+                console.log(room)
+                const renter = await Renter.findOne({ _id: room.renterId }).exec();
                 const message = {
                         type: 'text',
-                        text: 'Klaco'
+                        text: messageData,
                       };
-                client.pushMessage('U1cec79b3a5d9bfda564b68cbf73f1f1b', message)                      
+                console.log(renter.lineId)
+                client.pushMessage(renter.lineId, message)                      
                 console.log('req.body =>', JSON.stringify(req.body,null,2)) //สิ่งที่ Line ส่งมา
                 res.send("HTTP POST request sent to the webhook URL!")
                 

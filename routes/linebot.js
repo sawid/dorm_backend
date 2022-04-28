@@ -2,8 +2,10 @@ const express = require('express');
 const { lineSent, lineSentMsg, lineSentBroadcast } = require('../controllers/linebot');
 const router = express.Router()
 
-router.post('/line-send-broadcast', lineSentBroadcast);
+const { auth, adminCheck } = require('../middleware/auth')
 
-router.post('/line-send', lineSentMsg);
+router.post('/line-send-broadcast', auth, adminCheck, lineSentBroadcast);
+
+router.post('/line-send', auth, adminCheck, lineSentMsg);
 
 module.exports = router
