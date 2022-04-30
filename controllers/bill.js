@@ -3,19 +3,33 @@ const Bill = require("../models/Bill")
 const Cost = require("../models/Cost")
 const jwt = require("jsonwebtoken")
 const { token } = require('morgan')
+const Room = require('../models/Room')
 
 exports.createBill = async(req, res) => {
     try {
         const { roomId, month, rentalFee } = req.body
+        console.log(req.body)
         var bill = await Bill.findOne({ roomId: roomId, month: month, rentalFee: rentalFee })
         console.log(bill)
         if (bill) {
             return res.status(400).send('Bill Already Exists')
         }
+        const room = await Room.findOne({ roomName: roomId }).exec();
+        if(room) {
+            console.log("room finded")
+            console.log(room)
+        }
+        else {
+            return res.status(400).send('Room Not Exists')
+        }
+        console.log(room.roomName)
+        const roomIdDataBase = room._id
+        console.log(roomIdDataBase)
         bill = new Bill({
-            roomId,
-            month,
-            rentalFee,
+            roomId: roomId,
+            month: month,
+            roomIdDataBase: roomIdDataBase,
+            rentalFee: rentalFee,
         })
         await bill.save();
         res.send("Bill Room Success");

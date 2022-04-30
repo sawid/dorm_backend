@@ -8,6 +8,9 @@ const BillSchema = new mongoose.Schema(
     month: {
       type: String,
     },
+    roomIdDataBase: {
+      type: String,
+    }, 
     isBillNotified: {
       type: Boolean,
       default: false,
