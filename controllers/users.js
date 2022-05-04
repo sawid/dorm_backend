@@ -72,3 +72,68 @@ exports.changeRole = async (req, res) => {
                 res.status(500).send("ServerError")
         }
 }
+
+exports.changeFirstname = async (req, res) => {
+        try {
+                console.log("changeFirstname")
+                console.log(req.body.profile)
+                const id = req.params.id
+                const user = await User.findOneAndUpdate({ _id:id }, { firstname: req.body.profile.firstname })
+                res.send(user)
+        } catch (err) {
+                console.log(err);
+                res.status(500).send("ServerError")
+        }
+}
+
+exports.changeLastname = async (req, res) => {
+        try {
+                console.log("changeLastname")
+                console.log(req.body.profile)
+                const id = req.params.id
+                const user = await User.findOneAndUpdate({ _id:id }, { lastname: req.body.profile.lastname })
+                res.send(user)
+        } catch (err) {
+                console.log(err);
+                res.status(500).send("ServerError")
+        }
+}
+
+exports.changeTelnumber = async (req, res) => {
+        try {
+                console.log("changeTelnumber")
+                console.log(req.body.profile)
+                const id = req.params.id
+                const user = await User.findOneAndUpdate({ _id:id }, { telnumber: req.body.profile.telnum })
+                res.send(user)
+        } catch (err) {
+                console.log(err);
+                res.status(500).send("ServerError")
+        }
+}
+
+exports.changeEmail = async (req, res) => {
+        try {
+                console.log("changeEmail")
+                console.log(req.body.profile)
+                const id = req.params.id
+                const user = await User.findOneAndUpdate({ _id:id }, { Email: req.body.profile.email })
+                res.send(user)
+        } catch (err) {
+                console.log(err);
+                res.status(500).send("ServerError")
+        }
+}
+
+exports.changeCellnumber= async (req, res) => {
+        try {
+                console.log("changeCellnumber")
+                console.log(req.body.profile)
+                const id = req.params.id
+                const user = await User.findOneAndUpdate({ _id:id }, { cellnumber: req.body.profile.cellnum })
+                res.send(user)
+        } catch (err) {
+                console.log(err);
+                res.status(500).send("ServerError")
+        }
+}

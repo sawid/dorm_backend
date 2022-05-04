@@ -16,6 +16,26 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    firstname: {
+      type: String,
+      default: "",
+    },
+    lastname: {
+      type: String,
+      default: "",
+    },
+    telnumber: {
+      type: String,
+      default: "",
+    },
+    Email: {
+      type: String,
+      default: "",
+    },
+    cellnumber: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );
