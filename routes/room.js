@@ -1,11 +1,21 @@
 const express = require('express')
 const router = express.Router()
 
-const { listRoom, createRoom, readRoom, removeRoom ,updateRoom, getRoomName } = require('../controllers/room')
+const { listProblem , readProblem} = require('../controllers/problem')
+const { listRoom, createRoom, readRoom, removeRoom ,updateRoom, getRoomName, getProblem } = require('../controllers/room')
 
 const { auth, adminCheck } = require('../middleware/auth')
 
 router.get('/room', auth, adminCheck, listRoom);
+
+//Problem
+router.get('/problem', auth, adminCheck, listRoom);
+
+router.get('/problem/:id', auth, adminCheck, readProblem);
+
+router.get('/get-problem/:id', auth, adminCheck, getProblem);
+
+router.get('/getRenter/:id', auth ,adminCheck , getRoomName) 
 
 router.get('/get-room-name/:id', auth, adminCheck, getRoomName);
 

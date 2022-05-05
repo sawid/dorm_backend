@@ -8,7 +8,7 @@ const { auth, adminCheck } = require('../middleware/auth')
 // Public Route
 router.get('/users', auth, adminCheck, listUsers);
 
-router.get('/users/:id', auth, adminCheck, readUsers);
+router.get('/users/:id', auth , readUsers);
 
 router.put('/users/:id', auth, adminCheck, updateUsers);
 

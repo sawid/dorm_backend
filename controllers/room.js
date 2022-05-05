@@ -1,8 +1,10 @@
 const bcrypt = require('bcryptjs')
 const Room = require("../models/Room")
+
 const jwt = require("jsonwebtoken")
 const { token } = require('morgan')
 const Bill = require('../models/Bill')
+const Problem = require('../models/Problem')
 
 exports.createRoom = async (req, res) => {
         try {
@@ -49,9 +51,9 @@ exports.readRoom = async (req, res) => {
 exports.updateRoom = async(req, res) => {
         try{
            const id = req.params.id
-           var { amountBed , rentalFee } = req.body.dataRoom
-           console.log(amountBed)
-           const room = await Room.findOneAndUpdate({ _id:id }, { amountBed: amountBed , rentalFee : rentalFee}).exec();
+           var { amountBed , rentalFee,room_type ,renterId} = req.body.dataRoom
+           console.log(renterId)
+           const room = await Room.findOneAndUpdate({ _id:id }, { amountBed: amountBed , rentalFee : rentalFee ,room_type : room_type ,renterId : renterId}).exec();
            res.send(room)
 
         }catch(err){
@@ -97,7 +99,19 @@ exports.getRoomName = async (req, res) => {
         }
 }
 
+exports.getProblem = async (req, res) => {
+        try {
+                const id = req.params.id
+                const room = await Room.findOne({ _id:id }).exec();
+                console.log(room.roomName)
+                const problem = await Problem.find({ roomName:room.roomName }).exec();
 
+                res.send(problem)
+        } catch (err) {
+                console.log(err);
+                res.status(500).send("ServerError")
+        }
+}
 
 
 // Not Use 
